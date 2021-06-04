@@ -26,7 +26,7 @@ More information on Rock Paper Frigate can be found at [rockpaperfrigate.com](ht
   
 In the game Rock Paper Frigate, players can challenge each other to starship fleet battles by choosing battle terms (such as number of ships per fleet and type of ships allowed), building a formation of ships, and then watching both fleets battle to determine a winner.
 
-PvP in the game is designed to be played “in the background”, as a lot of progress depends on actions by the other player. A player might choose their formation right after accepting a challenge, but choose not to view the battle right away. This creates an opprotunity for lazy calculation of battles via the Golem network!
+PvP in the game is designed to be played “in the background”, as a lot of progress depends on actions by the other player. A player might choose their formation right after accepting a challenge, but choose not to view the battle right away. This creates an opportunity for lazy calculation of battles via the Golem network!
 
 Fleets can contain a single ship... or thousands! And there are currently 8 different types of ships, each with their own strengths, weaknesses, and abilities. Fleets battle by flying directly into each other, so one of the fleet formations will be rotated 180 degrees, and as both fleets fly through each other, opposing ships that collide will fight! The result of a 1 to 1 ship battle depends on both ships stats, and one, both, or neither ship may be destroyed. Non-destroyed ships will continue to fly with the fleet and may interact with more ships as the fleets continue to pass through one another. The fleet that destroys the most of their opponent's ships wins the battle.
 
@@ -119,7 +119,7 @@ This requester integrates with a AWS DynamoDB table and polls an index on the ta
 -  `pip3 install -r requirements.txt`
 
   
-2. This requestor requires a dynamodb table to be setup in AWS. This means you'll need an AWS account, an environment with credentials to the account, and permission to create cloudformation stacks and dynamodb tables. AWS setup is outside the scope of this readme however, so you may want to check out https://aws.amazon.com to learn how to get started with AWS.
+2. This requestor requires a dynamodb table to be set up in AWS. This means you'll need an AWS account, an environment with credentials to the account, and permission to create cloudformation stacks and dynamodb tables. AWS setup is outside the scope of this readme however, so you may want to check out https://aws.amazon.com to learn how to get started with AWS.
  
 
 3. If you do have a correctly setup AWS envronment, this project has a cloudformation template that will create the dynamodb table and index you need to run this requestor. To create a stack called `golem-fleet-battle-simulator-example` with a single dynamodb table, go to the`requestor/aws` directory and run:
