@@ -1,11 +1,19 @@
 
+  
 # Golem Fleet Battle Simulator
 
-Golem Fleet Battle Simulator is a system for calculating the results of a battle between two opposing starship fleets by using the Golem network and is used in the iOS game Rock Paper Frigate to determine the result of PvP fleet battles.
+Golem Fleet Battle Simulator is a system for calculating the results of a battle between two opposing starship fleets on the Golem network and is used in the iOS game Rock Paper Frigate to determine the result of PvP fleet battles.
 
 More information on Rock Paper Frigate can be found at [rockpaperfrigate.com](https://rockpaperfrigate.com)
+ 
+<div align="center">
+  <br/>
+  <img src="https://rockpaperfrigate.com/img/rpf-formation-help.gif" align="center" alt="Bomber">
+</div>
+
 
 ## Table of contents
+
 
 *  [Fleet Battles Explained](#fleet-battles-explained)
 *  [Project Structure](#project-structure)
@@ -15,6 +23,7 @@ More information on Rock Paper Frigate can be found at [rockpaperfrigate.com](ht
 
 ## Fleet Battles Explained
 
+  
 In the game Rock Paper Frigate, players can challenge each other to starship fleet battles by choosing battle terms (such as number of ships per fleet and type of ships allowed), building a formation of ships, and then watching both fleets battle to determine a winner.
 
 PvP in the game is designed to be played “in the background”, as a lot of progress depends on actions by the other player. A player might choose their formation right after accepting a challenge, but choose not to view the battle right away. This creates an opprotunity for lazy calculation of battles via the Golem network!
@@ -23,8 +32,17 @@ Fleets can contain a single ship... or thousands! And there are currently 8 diff
 
 Further complicating the battle calculation is that the simulation is run twice! Once for each player. This way of processing the battle doesn't change the final result, but let's each player watch the battle as if their fleet is the one attacking and in easy to follow "waves", instead of a messy, instantly concluding, explosion of ships smashing into each other!
 
+  
+  
+<div align="center">
+  <br/>
+  <img src="https://rockpaperfrigate.com/img/fighter.gif" align="center" alt="Fighter">
+</div>
+  
+  
 
 ## Project Structure
+
 
 * docker - Folder containing a Dockerfile for a python:3.8.7-slim image with the worker code copied into it. Also contains scripts to build the worker image and upload it to the Yagna repository.
 
@@ -39,6 +57,12 @@ Further complicating the battle calculation is that the simulation is run twice!
 * worker/constants.py - All the ship types that can be placed in fleets and their stats.
 
 * worker/worker.py - Worker code.
+
+
+<div align="center">
+  <br/>
+  <img src="https://rockpaperfrigate.com/img/frigate.gif" align="center" alt="Frigate">
+</div>
 
   
 
@@ -82,7 +106,7 @@ The simplest way to run a fleet battle simulation is by using a fleet.json file 
 
 3. When the script exits you should have just run a starship fleet battle simulation on the Golem Network! Everything that happened in the battle, as well as the final state of both fleets, should have been printed in the script output and saved to `requestor/local/data/result.json`
 
-  
+
 ### Simulating Fleet Battles by Polling a DynamoDB Index for Un-Calculated Battles
 
 This requester integrates with a AWS DynamoDB table and polls an index on the table to find challenges that have a battle that needs a result to be calculated. This is determined by if the challenge is in a 'prepared' state. If a prepared challenge is found, the fleet data is pulled from the table and a simulation is run on the Golem network. Once finished, the battle result is saved back to the challenge in the table and the challenge is set to the 'complete' state.
@@ -94,13 +118,15 @@ This requester integrates with a AWS DynamoDB table and polls an index on the ta
 
 -  `pip3 install -r requirements.txt`
 
+  
 2. This requestor requires a dynamodb table to be setup in AWS. This means you'll need an AWS account, an environment with credentials to the account, and permission to create cloudformation stacks and dynamodb tables. AWS setup is outside the scope of this readme however, so you may want to check out https://aws.amazon.com to learn how to get started with AWS.
+ 
 
 3. If you do have a correctly setup AWS envronment, this project has a cloudformation template that will create the dynamodb table and index you need to run this requestor. To create a stack called `golem-fleet-battle-simulator-example` with a single dynamodb table, go to the`requestor/aws` directory and run:
 
--  `./deploy_aws`
+-  `./deploy_aws.sh`
 
-3. Now you should have an empty dynamodb table called `golem-fleet-battle-simulator-example.Challenge` in AWS. You may want to open a browser to the AWS console to view the table for the next steps.
+3. Now you should have an empty dynamodb table called `golem-fleet-battle-simulator-example.Challenge` in AWS. You may want to open a browser to the AWS console to view the table for the next steps.  
 
 4. Time to run the requestor. Once you do, it will start polling your dynamodb index and looping every 10 seconds.
 
@@ -111,5 +137,3 @@ This requester integrates with a AWS DynamoDB table and polls an index on the ta
 -  `python3 add_pending_challenge.py`
 
 6. In a few seconds, you should see your requestor script detect the new challenge via the index, pull the challenge's fleet data, calculate the battle result via the Golem network, and save the result back into the challenge in dynamodb.
-
-  
