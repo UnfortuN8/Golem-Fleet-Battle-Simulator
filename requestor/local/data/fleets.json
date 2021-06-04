@@ -1,0 +1,88 @@
+{
+  "challenger": {
+    "formation": [
+      [
+        "1",
+        "2"
+      ],
+      [
+        "3",
+        "4"
+      ],
+      [
+        "5",
+        "6"
+      ],
+      [
+        "7",
+        null
+      ]
+    ],
+    "manifest": {
+      "7": {
+        "type": "bomber"
+      },
+      "3": {
+        "type": "bomber"
+      },
+      "4": {
+        "type": "frigate"
+      },
+      "5": {
+        "type": "bomber"
+      },
+      "1": {
+        "type": "bomber"
+      },
+      "6": {
+        "type": "frigate"
+      },
+      "2": {
+        "type": "frigate"
+      }
+    }
+  },
+  "challengee": {
+    "formation": [
+      [
+        "1",
+        "2"
+      ],
+      [
+        "3",
+        "4"
+      ],
+      [
+        "5",
+        "6"
+      ],
+      [
+        "7",
+        null
+      ]
+    ],
+    "manifest": {
+      "7": {
+        "type": "frigate"
+      },
+      "3": {
+        "type": "bomber"
+      },
+      "4": {
+        "type": "bomber"
+      },
+      "5": {
+        "type": "fighter"
+      },
+      "1": {
+        "type": "bomber"
+      },
+      "6": {
+        "type": "fighter"
+      },
+      "2": {
+        "type": "bomber"
+      }
+    }
+  }
+}

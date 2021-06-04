@@ -1,0 +1,10 @@
+.DS_Store
+.pytest_cache
+.vscode
+.aws-sam
+.build
+*.pyc
+package.yml
+*.gvmi
+test/data/result.json
+yapapi.log

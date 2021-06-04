@@ -1,0 +1,6 @@
+yapapi==0.5.5
+boto3==1.17.82
+pynamodb==4.3.3
+pytz==2020.1
+awscli==1.18.82
+aws-sam-cli==0.53.0

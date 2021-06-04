@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Golem Fleet Battle Simulator Example
+
+
+Parameters:
+  AppName:
+    Type: String
+    Description: The name of the application for naming.
+    Default: golem-fleet-battle-simulator-example
+  Version:
+    Type: String
+    Description: Version of the app
+    Default: v1
+
+    
+Resources:
+
+
+  # ====================================
+  # DynamoDB Table - Challenges
+  # ====================================
+
+  ChallengeTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+
+      TableName: golem-fleet-battle-simulator-example.Challenge
+        
+      AttributeDefinitions: 
+        - 
+          AttributeName: id
+          AttributeType: S
+        - 
+          AttributeName: created
+          AttributeType: S
+        - 
+          AttributeName: state
+          AttributeType: S
+
+      KeySchema: 
+        - 
+          AttributeName: id
+          KeyType: HASH
+
+      GlobalSecondaryIndexes: 
+        - 
+          IndexName: StateIndex
+          KeySchema: 
+            - 
+              AttributeName: state
+              KeyType: HASH
+            - 
+              AttributeName: created
+              KeyType: RANGE
+          Projection: 
+            ProjectionType: ALL
+
+      BillingMode: PAY_PER_REQUEST
+
