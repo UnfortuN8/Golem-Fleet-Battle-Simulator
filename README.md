@@ -18,6 +18,9 @@ More information on Rock Paper Frigate can be found at [rockpaperfrigate.com](ht
 *  [Fleet Battles Explained](#fleet-battles-explained)
 *  [Project Structure](#project-structure)
 *  [Setup](#setup)
+*  [Running via Fleet File](#running-via-fleet-file)
+*  [Running via Polling a DynamoDB Index](#running-via-polling-a-dynamodb-index)
+*  [Running via File using the Service Model](#running-via-file-using-the-service-model)
 
   
 
@@ -91,7 +94,7 @@ There's already an image built, uploaded, and set in the requester code, so this
 3. Note the "hash link" returned from the last command and set it to the image_hash property in the requestor.py code you want to run.
 
   
-### Simulating a Fleet Battle via a Local Fleet File
+## Running via Fleet File
 
 The simplest way to run a fleet battle simulation is by using a fleet.json file as input for the simulation. When you run this example, a file located at `requestor/local/data/fleet.json` will be used as input for the simulation and a result will be saved at `requestor/local/data/result.json`.
 
@@ -109,7 +112,7 @@ The simplest way to run a fleet battle simulation is by using a fleet.json file 
 3. When the script exits you should have just run a starship fleet battle simulation on the Golem Network! Everything that happened in the battle, as well as the final state of both fleets, should have been printed in the script output and saved to `requestor/local/data/result.json`
 
 
-### Simulating Fleet Battles by Polling a DynamoDB Index for Un-Calculated Battles
+## Running via Polling a DynamoDB Index
 
 This requester integrates with a AWS DynamoDB table and polls an index on the table to find challenges that have a battle that needs a result to be calculated. This is determined by if the challenge is in a 'prepared' state. If a prepared challenge is found, the fleet data is pulled from the table and a simulation is run on the Golem network. Once finished, the battle result is saved back to the challenge in the table and the challenge is set to the 'complete' state.
 
@@ -141,7 +144,7 @@ This requester integrates with a AWS DynamoDB table and polls an index on the ta
 6. In a few seconds, you should see your requestor script detect the new challenge via the index, pull the challenge's fleet data, calculate the battle result via the Golem network, and save the result back into the challenge in dynamodb.
 
 
-### Simulating a Fleet Battle via a Local Fleet File using the Service Model
+## Running via File using the Service Model
 
 Another way of processing fleet battles on Golem is using the Service Model. Requestors using this model can setup a service on the network that runs continuously and can accept and process work immediately with little latency.
 
