@@ -161,7 +161,7 @@ This requestor uses the same input and output files as the 'local' requestor.  W
 
 -  `python3 requestor.py`
 
-3. The requestor will setup a service on 1 provider and then monitor the service. You will start to see log statrements saying 'NO FLEET DATA FOUND... WAITING...'.
+3. The requestor will setup a service on 1 provider and then monitor the service. You will start to see log statements saying 'NO FLEET DATA FOUND... WAITING...'.
 
 4. The service is now waiting for data to be sent to it to process. To generate some fleet data, open another shell terminal at the same directory and run:
 
