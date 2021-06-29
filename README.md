@@ -52,6 +52,8 @@ Further complicating the battle calculation is that the simulation is run twice!
 
 * requestor/aws - Requestor that polls a dynamodb index looking for challenges with 'pending' battle results and saves the results back to the dynamodb table.
 
+* requestor/service - Requestor that uses the Golem Service Model to vastly reduce latency. Also reads a local file for input and outputs a file for the result.
+
 * worker - Code that is sent to providers in order to calculate battle results.
 
 * worker/constants.py - All the ship types that can be placed in fleets and their stats.
@@ -137,3 +139,31 @@ This requester integrates with a AWS DynamoDB table and polls an index on the ta
 -  `python3 add_pending_challenge.py`
 
 6. In a few seconds, you should see your requestor script detect the new challenge via the index, pull the challenge's fleet data, calculate the battle result via the Golem network, and save the result back into the challenge in dynamodb.
+
+
+### Simulating a Fleet Battle via a Local Fleet File using the Service Model
+
+Another way of processing fleet battles on Golem is using the Service Model. Requestors using this model can setup a service on the network that runs continuously and can accept and process work immediately with little latency.
+
+This requestor uses the same input and output files as the 'local' requestor.  When you run this example, a file located at `requestor/service/data/fleet.json` will be used as input for the simulation and a result will be saved at `requestor/service/data/result.json`.
+
+
+1. Start by installing the requirements for this requestor script. From the project directory run (Note: You may want to install these dependancies within a virtual environment, but that's outside the scope of this example.):
+
+-  `cd requestor/service`
+
+-  `pip3 install -r requirements.txt`
+
+2. With the dependancies installed, now you can run the requestor!
+
+-  `python3 requestor.py`
+
+3. The requestor will setup a service on 1 provider and then monitor the service. You will start to see log statrements saying 'NO FLEET DATA FOUND... WAITING...'.
+
+4. The service is now waiting for data to be sent to it to process. To generate some fleet data, open another shell terminal at the same directory and run:
+
+-  `./add_new_fleet_data.sh`
+
+5. The script will copy the file at `data/example_fleets.json` to `data/fleets.json`, the place where the requestor is looking for data, and you should see the previous terminal running the requestor detect the data. The service will then process the fleet data and a result will be saved at `requestor/service/data/result.json`.
+
+6. Since this requestor setup a service, you'll see that the provider is still up and ready for more data! If you would like to send it more, simply run `./add_new_fleet_data.sh` again, or edit the `data/example_fleets.json` file before you do, to change the fleets and get different results!
